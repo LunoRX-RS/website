@@ -1,0 +1,56 @@
+---
+import Layout from '../layouts/Layout.astro';
+import type { Lang } from '../i18n';
+import { meta } from './site';
+import { softwareApplication, webSite, faqPage } from '../lib/seo';
+import { content as faq } from './faq/content';
+import { content as features } from './features/content';
+import Header from './header/Header.astro';
+import Hero from './hero/Hero.astro';
+import Stage from './stage/Stage.astro';
+import HighlightsSection from './highlights/HighlightsSection.astro';
+import FeaturesSection from './features/FeaturesSection.astro';
+import Showcase from './showcase/Showcase.astro';
+import ManifestoSection from './manifesto/ManifestoSection.astro';
+import StatsSection from './stats/StatsSection.astro';
+import Platforms from './platforms/Platforms.astro';
+import FaqSection from './faq/FaqSection.astro';
+import LegalSection from './legal/LegalSection.astro';
+import Cta from './cta/Cta.astro';
+import Footer from './footer/Footer.astro';
+
+const { lang } = Astro.props as { lang: Lang };
+const jsonLd = [
+	softwareApplication(Astro.site, lang, meta[lang].description, features[lang].items.map((i) => i.title)),
+	webSite(Astro.site, lang, meta[lang].description),
+	faqPage(faq[lang].items, lang),
+];
+---
+
+<Layout lang={lang} title={meta[lang].title} description={meta[lang].description} jsonLd={jsonLd}>
+	<Header lang={lang} />
+	<main>
+		<div data-classic><Hero lang={lang} /></div>
+		<Stage lang={lang} />
+		<HighlightsSection lang={lang} />
+		<div data-classic>
+			<FeaturesSection lang={lang} />
+			<Showcase lang={lang} />
+		</div>
+		<ManifestoSection lang={lang} />
+		<StatsSection lang={lang} />
+		<Platforms lang={lang} />
+		<FaqSection lang={lang} />
+		<LegalSection lang={lang} />
+		<Cta lang={lang} />
+	</main>
+	<Footer lang={lang} />
+	<div data-cursor aria-hidden="true" class="pointer-events-none fixed left-0 top-0 z-[100] hidden opacity-0">
+		<span data-cursor-ring class="absolute -left-5 -top-5 block size-10 rounded-full border border-foreground/50"></span>
+		<span data-cursor-dot class="absolute -left-[3px] -top-[3px] block size-1.5 rounded-full bg-foreground"></span>
+	</div>
+</Layout>
+
+<script>
+	import './motion/landing-motion';
+</script>
