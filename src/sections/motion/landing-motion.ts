@@ -83,8 +83,8 @@ function initStage(lenis: Lenis, cleanups: Array<() => void>) {
 		.from($$('[data-star]'), { scale: 0, transformOrigin: '50% 50%', duration: 0.8, stagger: 0.07, ease: 'back.out(2)' }, 0.8);
 
 	const orbits = [
-		gsap.to($$('[data-orbit="cw"]'), { rotation: 360, duration: 160, ease: 'none', repeat: -1, paused: true }),
-		gsap.to($$('[data-orbit="ccw"]'), { rotation: -360, duration: 220, ease: 'none', repeat: -1, paused: true }),
+		gsap.to($$('[data-orbit="cw"]'), { rotation: 360, svgOrigin: '400 400', duration: 160, ease: 'none', repeat: -1, paused: true }),
+		gsap.to($$('[data-orbit="ccw"]'), { rotation: -360, svgOrigin: '400 400', duration: 220, ease: 'none', repeat: -1, paused: true }),
 	];
 	// Ambient motion only runs while the pinned scene is on screen and the moon is still visible.
 	ScrollTrigger.create({
@@ -189,8 +189,8 @@ function initClassicHero(lenis: Lenis, cleanups: Array<() => void>) {
 		.from(hero.querySelectorAll('[data-star]'), { scale: 0, transformOrigin: '50% 50%', duration: 0.8, stagger: 0.07, ease: 'back.out(2)' }, 0.8);
 	gsap.to(hero.querySelector('[data-moon]'), { rotation: 24, scale: 1.12, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
 	gsap.fromTo(hero.querySelector('[data-hero-window]'), { scale: 0.9, yPercent: 8 }, { scale: 1, yPercent: 0, ease: 'none', scrollTrigger: { trigger: hero.querySelector('[data-hero-window]'), start: 'top 100%', end: 'top 40%', scrub: true } });
-	gsap.to(hero.querySelectorAll('[data-orbit="cw"]'), { rotation: 360, duration: 160, ease: 'none', repeat: -1 });
-	gsap.to(hero.querySelectorAll('[data-orbit="ccw"]'), { rotation: -360, duration: 220, ease: 'none', repeat: -1 });
+	gsap.to(hero.querySelectorAll('[data-orbit="cw"]'), { rotation: 360, svgOrigin: '400 400', duration: 160, ease: 'none', repeat: -1 });
+	gsap.to(hero.querySelectorAll('[data-orbit="ccw"]'), { rotation: -360, svgOrigin: '400 400', duration: 220, ease: 'none', repeat: -1 });
 	initBars(hero, lenis, cleanups);
 }
 
@@ -220,43 +220,6 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
 			},
 		});
 		cleanups.push(() => gsap.set(header, { clearProps: 'transform' }));
-	}
-
-	// Cursor follower (mouse only).
-	const cursor = document.querySelector<HTMLElement>('[data-cursor]');
-	if (cursor && matchMedia('(hover: hover) and (pointer: fine)').matches) {
-		const ring = cursor.querySelector<HTMLElement>('[data-cursor-ring]')!;
-		const dot = cursor.querySelector<HTMLElement>('[data-cursor-dot]')!;
-		cursor.classList.remove('hidden');
-		const rx = gsap.quickTo(ring, 'x', { duration: 0.45, ease: 'power3.out' });
-		const ry = gsap.quickTo(ring, 'y', { duration: 0.45, ease: 'power3.out' });
-		const dx = gsap.quickTo(dot, 'x', { duration: 0.1, ease: 'power3.out' });
-		const dy = gsap.quickTo(dot, 'y', { duration: 0.1, ease: 'power3.out' });
-		let visible = false;
-		let hot = false;
-		const onMove = (e: PointerEvent) => {
-			rx(e.clientX); ry(e.clientY); dx(e.clientX); dy(e.clientY);
-			if (!visible) {
-				visible = true;
-				gsap.to(cursor, { opacity: 1, duration: 0.3, overwrite: 'auto' });
-			}
-			const nowHot = !!(e.target as Element | null)?.closest('a, button, [role="tab"], summary, input');
-			if (nowHot !== hot) {
-				hot = nowHot;
-				gsap.to(ring, { scale: hot ? 1.7 : 1, opacity: hot ? 0.55 : 1, duration: 0.3, ease: 'power3.out', overwrite: 'auto' });
-			}
-		};
-		const onLeave = () => {
-			visible = false;
-			gsap.to(cursor, { opacity: 0, duration: 0.3, overwrite: 'auto' });
-		};
-		window.addEventListener('pointermove', onMove, { passive: true });
-		document.documentElement.addEventListener('pointerleave', onLeave);
-		cleanups.push(() => {
-			window.removeEventListener('pointermove', onMove);
-			document.documentElement.removeEventListener('pointerleave', onLeave);
-			cursor.classList.add('hidden');
-		});
 	}
 
 	// Magnetic buttons.

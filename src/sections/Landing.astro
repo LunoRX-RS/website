@@ -18,6 +18,7 @@ import FaqSection from './faq/FaqSection.astro';
 import LegalSection from './legal/LegalSection.astro';
 import Cta from './cta/Cta.astro';
 import Footer from './footer/Footer.astro';
+import SiteCursor from './cursor/SiteCursor';
 
 const { lang } = Astro.props as { lang: Lang };
 const jsonLd = [
@@ -45,10 +46,7 @@ const jsonLd = [
 		<Cta lang={lang} />
 	</main>
 	<Footer lang={lang} />
-	<div data-cursor aria-hidden="true" class="pointer-events-none fixed left-0 top-0 z-[100] hidden opacity-0">
-		<span data-cursor-ring class="absolute -left-5 -top-5 block size-10 rounded-full border border-foreground/50"></span>
-		<span data-cursor-dot class="absolute -left-[3px] -top-[3px] block size-1.5 rounded-full bg-foreground"></span>
-	</div>
+	<SiteCursor client:idle />
 </Layout>
 
 <script>
