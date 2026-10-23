@@ -9,7 +9,7 @@ export const content: Localized<{ label: string; stats: Stat[] }> = {
 			{ value: 8, label: 'แหล่งเนื้อเพลงที่เลือกลำดับได้' },
 			{ value: 3, label: 'ระบบที่รองรับ: Mac, Windows, Linux' },
 			{ value: 0, label: 'เซิร์ฟเวอร์ที่ต้องมีเพื่อใช้แอป' },
-			{ text: 'GPL-3.0', label: 'สัญญาอนุญาต ซอร์สโค้ดเปิดให้ทุกคน' },
+			{ text: 'MIT', label: 'สัญญาอนุญาต ซอร์สโค้ดเปิดให้ทุกคน' },
 		],
 	},
 	en: {
@@ -18,7 +18,7 @@ export const content: Localized<{ label: string; stats: Stat[] }> = {
 			{ value: 8, label: 'lyrics sources you can put in your own order' },
 			{ value: 3, label: 'supported systems: Mac, Windows, Linux' },
 			{ value: 0, label: 'servers needed to use the app' },
-			{ text: 'GPL-3.0', label: 'license. The source code is open to everyone' },
+			{ text: 'MIT', label: 'license. The source code is open to everyone' },
 		],
 	},
 };

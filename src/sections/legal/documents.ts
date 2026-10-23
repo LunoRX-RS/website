@@ -48,7 +48,7 @@ export const legalDocs: Record<Lang, Record<string, LegalDoc>> = {
 			sections: [
 				{ heading: 'ข้อมูลที่เก็บบนเครื่องของคุณ', body: [
 					'เพลย์ลิสต์ เพลงที่กดใจ ประวัติการฟัง การตั้งค่า และไฟล์ที่เก็บไว้ฟังตอนไม่มีเน็ต อยู่ในเครื่องของคุณ บน Linux อยู่ที่ ~/.local/share/io.lunorx.desktop และยังอยู่ต่อหลังถอนการติดตั้ง',
-					'ไฟล์เนื้อเพลงที่คุณสร้างด้วยเครื่องมือ Lyric Maker เป็นไฟล์ข้อความ เก็บที่ ~/Documents/LUNOR-X Lyrics/',
+					'ไฟล์เนื้อเพลงที่คุณสร้างด้วยเครื่องมือ Lyric Maker เป็นไฟล์ข้อความ เก็บที่ ~/Documents/LunoRX Lyrics/',
 					'คุณลบประวัติการฟังได้จากในแอป',
 				] },
 				{ heading: 'รหัสล็อกอิน', body: [
@@ -58,8 +58,11 @@ export const legalDocs: Record<Lang, Record<string, LegalDoc>> = {
 				] },
 				{ heading: 'ข้อมูลที่ส่งออกจากเครื่อง', body: [
 					'YouTube Music: แอปค้นหาและเล่นเพลงโดยติดต่อ YouTube Music โดยตรง จึงเป็นไปตามข้อมูลที่บริการนั้นเก็บ',
-					'บริการเนื้อเพลง: แอปส่งเฉพาะชื่อเพลง ชื่อศิลปิน และความยาวเพลง ไม่ส่งรหัสล็อกอินหรือข้อมูลบัญชี คุณปิดแต่ละแหล่งได้ที่ ตั้งค่า > การเล่นและเสียง',
-					'การซิงก์ (ไม่บังคับ): ถ้าคุณเชื่อมต่อเซิร์ฟเวอร์ LUNOR-X แอปจะส่งแค่บัญชีและเพลย์ลิสต์ เซิร์ฟเวอร์ไม่รับรหัสล็อกอิน การค้นหา หรือข้อมูลการเล่น คุณตั้งเซิร์ฟเวอร์เองได้ และแอปใช้งานได้โดยไม่ต้องมีเซิร์ฟเวอร์',
+					'บริการเนื้อเพลง: แอปส่งเฉพาะชื่อเพลง ชื่อศิลปิน ความยาวเพลง และชื่ออัลบั้ม (ถ้ามี) หรือคำที่คุณพิมพ์ค้นหาเนื้อเพลงเอง ไม่ส่งรหัสล็อกอินหรือข้อมูลบัญชี คุณปิดแต่ละแหล่งได้ที่ ตั้งค่า > การเล่นและเสียง',
+					'การซิงก์ (ไม่บังคับ): ถ้าคุณเชื่อมต่อเซิร์ฟเวอร์ LUNOR-X แอปจะส่งแค่บัญชีและเพลย์ลิสต์ เซิร์ฟเวอร์ไม่รับรหัสล็อกอิน YouTube หรือคำค้นหา คุณตั้งเซิร์ฟเวอร์เองได้ และแอปใช้งานได้โดยไม่ต้องมีเซิร์ฟเวอร์',
+					'สถิติการฟัง (ไม่บังคับ ต้องเปิดเอง): ถ้าเปิดและเชื่อมต่อเซิร์ฟเวอร์ แอปจะส่งชื่อเพลง ชื่อศิลปิน รหัสเพลง จำนวนครั้งที่เล่น และเวลาที่เล่นล่าสุด ไปเก็บในบัญชีของคุณบนเซิร์ฟเวอร์ ถ้าไม่เปิด สถิติจะอยู่บนเครื่องเท่านั้น',
+					'ข้อมูลการใช้งานแบบไม่ระบุตัวตน (ไม่บังคับ ปิดไว้ตั้งแต่แรก): ถ้าเปิด แอปจะส่งชื่อตัวนับและจำนวนครั้ง เช่น เปิดแอปกี่ครั้ง หรือเจอข้อผิดพลาดประเภทไหน พร้อมรหัสเครื่องแบบสุ่ม ไม่มีชื่อเพลง ศิลปิน คำค้นหา หรือข้อมูลบัญชี คุณดูได้ในแอปว่ารอบถัดไปจะส่งอะไร',
+					'ลิงก์แชร์เพลย์ลิสต์: ถ้าคุณสร้างลิงก์แชร์ ใครที่มีลิงก์จะเห็นชื่อ คำอธิบาย และรายชื่อเพลงในเพลย์ลิสต์นั้นได้ โดยไม่ต้องล็อกอิน คุณยกเลิกลิงก์ได้ทุกเมื่อ',
 				] },
 				{ heading: 'สิทธิของคุณ', body: [
 					'เพราะข้อมูลส่วนใหญ่อยู่บนเครื่องคุณ คุณดู สำรอง และลบได้เอง ถ้าข้อมูลบนเครื่องกับบนเซิร์ฟเวอร์ไม่ตรงกัน แอปจะให้คุณเลือกว่าจะเก็บฉบับไหน ไม่เขียนทับเงียบ ๆ',
@@ -71,15 +74,14 @@ export const legalDocs: Record<Lang, Record<string, LegalDoc>> = {
 		},
 		license: {
 			title: 'สัญญาอนุญาตซอฟต์แวร์',
-			intro: 'LunoRX ใช้สัญญาอนุญาต GNU General Public License เวอร์ชัน 3 (GPL-3.0) ลิขสิทธิ์ © 2026 EvarinthoSec และผู้ร่วมพัฒนา',
+			intro: 'LunoRX ใช้สัญญาอนุญาต MIT ลิขสิทธิ์ © 2026 EvarinthoSec และผู้ร่วมพัฒนา',
 			sections: [
-				{ heading: 'GPL-3.0 ในภาษาง่าย ๆ', body: [
-					'คุณใช้ ศึกษา แก้ไข และแจกจ่ายต่อได้ ภายใต้เงื่อนไขของ GPL-3.0 โปรแกรมนี้ไม่มีการรับประกันใด ๆ',
-					'โปรเจกต์ใช้ GPL-3.0 เพราะนำโปรแกรม rustypipe (GPL-3.0) มาใช้ ใครได้รับแอปไป ก็ขอซอร์สโค้ดที่ตรงกันได้จากรีโปนี้',
+				{ heading: 'MIT ในภาษาง่าย ๆ', body: [
+					'คุณใช้ ศึกษา แก้ไข แจกจ่ายต่อ และนำไปใช้ในงานเชิงพาณิชย์ได้ ขอแค่เก็บข้อความลิขสิทธิ์และสัญญาอนุญาตไว้ด้วย โปรแกรมนี้ไม่มีการรับประกันใด ๆ',
 					`ซอร์สโค้ดและไฟล์ LICENSE ฉบับเต็ม: ${site.repo}`,
 				] },
 				{ heading: 'โปรแกรมของคนอื่นที่แอปใช้', body: [
-					'rustypipe 0.11.4 (GPL-3.0): ใช้ในแอป และมีการแก้ไขเล็กน้อยหนึ่งจุด',
+					'innerlight (MIT): ตัวเชื่อมต่อ YouTube ของแอป อยู่ในรีโป innerlight แยกต่างหาก',
 					'libmpv (LGPL-2.1 ขึ้นไป หรือ GPL-2.0 ขึ้นไป ขึ้นกับวิธีสร้างแต่ละชุด): ตัวเล่นเสียงที่แอปโหลดมาใช้ และรวมอยู่ในตัวติดตั้ง macOS และ Windows ซอร์สอยู่ที่ https://github.com/mpv-player/mpv',
 					'libmpv2 และ libmpv2-sys (LGPL-2.1): ตัวเชื่อมระหว่างภาษา Rust กับ libmpv',
 					'ไลบรารี 5 ตัวภายใต้ MPL-2.0: เก็บไฟล์สัญญาไว้ครบ และไม่ได้แก้ไข',
@@ -153,7 +155,7 @@ export const legalDocs: Record<Lang, Record<string, LegalDoc>> = {
 			sections: [
 				{ heading: 'What is stored on your computer', body: [
 					'Playlists, liked songs, listening history, settings and files kept for offline listening are stored on your computer. On Linux they are in ~/.local/share/io.lunorx.desktop and stay there after you uninstall.',
-					'Lyrics files you create with the Lyric Maker tool are plain text files in ~/Documents/LUNOR-X Lyrics/.',
+					'Lyrics files you create with the Lyric Maker tool are plain text files in ~/Documents/LunoRX Lyrics/.',
 					'You can delete your listening history from inside the app.',
 				] },
 				{ heading: 'Login details', body: [
@@ -163,8 +165,11 @@ export const legalDocs: Record<Lang, Record<string, LegalDoc>> = {
 				] },
 				{ heading: 'What leaves your computer', body: [
 					'YouTube Music: the app searches and plays music by talking to YouTube Music directly, so what that service collects applies.',
-					'Lyrics services: the app sends only the song title, artist name and length. It never sends your login or account details. You can turn each source off in Settings > Playback & audio.',
-					'Sync (optional): if you connect a LUNOR-X server, the app sends only your account and playlists. The server does not receive your login, searches or playback. You can run your own server, and the app works without one.',
+					'Lyrics services: the app sends only the song title, artist name, length and album name (when known), or the words you type when you search for lyrics yourself. It never sends your login or account details. You can turn each source off in Settings > Playback & audio.',
+					'Sync (optional): if you connect a LUNOR-X server, the app sends your account and playlists. The server does not receive your YouTube login or your searches. You can run your own server, and the app works without one.',
+					'Listening stats (optional, off unless you turn it on): if you turn it on and connect a server, the app sends song titles, artist names, track ids, play counts and the time each song was last played, stored in your account on that server. If you leave it off, stats stay on your computer.',
+					'Anonymous usage counts (optional, off by default): if you turn it on, the app sends counter names and counts, such as how often the app opened or which kind of error happened, with a random install id. It never sends song titles, artists, searches or account details. The app shows you exactly what the next upload will contain.',
+					'Playlist share links: if you create a share link, anyone with the link can see that playlist\'s name, description and songs without signing in. You can revoke the link at any time.',
 				] },
 				{ heading: 'Your rights', body: [
 					'Because most data is on your computer, you can view, back up and delete it yourself. If your computer and the server disagree, the app asks which version to keep. It never overwrites quietly.',
@@ -176,15 +181,14 @@ export const legalDocs: Record<Lang, Record<string, LegalDoc>> = {
 		},
 		license: {
 			title: 'Software license',
-			intro: 'LunoRX is released under the GNU General Public License version 3 (GPL-3.0). Copyright © 2026 EvarinthoSec and contributors.',
+			intro: 'LunoRX is released under the MIT License. Copyright © 2026 EvarinthoSec and contributors.',
 			sections: [
-				{ heading: 'GPL-3.0 in plain words', body: [
-					'You may use, study, change and share the software under the terms of GPL-3.0. There is no warranty.',
-					'The project uses GPL-3.0 because it uses the rustypipe program (GPL-3.0). Anyone who receives the app can ask for the matching source code from this repository.',
+				{ heading: 'MIT in plain words', body: [
+					'You may use, study, change, share and sell the software, as long as you keep the copyright notice and license text. There is no warranty.',
 					`Source code and the full LICENSE file: ${site.repo}`,
 				] },
 				{ heading: 'Other people\'s software the app uses', body: [
-					'rustypipe 0.11.4 (GPL-3.0): used inside the app, with one small local change.',
+					'innerlight (MIT): the app\'s YouTube connection, kept in its own innerlight repository.',
 					'libmpv (LGPL-2.1 or later, or GPL-2.0 or later, depending on how each build is made): the audio player the app loads, included in the macOS and Windows installers. Source: https://github.com/mpv-player/mpv',
 					'libmpv2 and libmpv2-sys (LGPL-2.1): the link between the Rust language and libmpv.',
 					'Five libraries under MPL-2.0: their license files are kept and they are not modified.',

@@ -12,7 +12,7 @@ export const site = {
 	installScript: 'curl -fsSL https://raw.githubusercontent.com/LunoRX-RS/desktop/main/scripts/install-linux.sh | sh',
 	installScriptDeb: 'curl -fsSL https://raw.githubusercontent.com/LunoRX-RS/desktop/main/scripts/install-linux.sh | sh -s -- --deb',
 	installScriptRemove: 'curl -fsSL https://raw.githubusercontent.com/LunoRX-RS/desktop/main/scripts/install-linux.sh | sh -s -- --uninstall',
-	updated: { th: '23 ตุลาคม 2569', en: 'October 23, 2026' } as Localized<string>,
+	updated: { th: '24 ตุลาคม 2569', en: 'October 24, 2026' } as Localized<string>,
 };
 
 export const meta: Localized<{ title: string; description: string }> = {
@@ -47,14 +47,14 @@ export const legalPages: Localized<{ slug: string; title: string; summary: strin
 	th: [
 		{ slug: 'disclaimer', title: 'ข้อสงวนสิทธิ์และเงื่อนไขการใช้งาน', summary: 'แอปนี้ไม่ได้เกี่ยวข้องกับ Google, YouTube หรือ Spotify รวมถึงเรื่องเครื่องหมายการค้าและความรับผิด' },
 		{ slug: 'privacy', title: 'ความเป็นส่วนตัว', summary: 'แอปเก็บอะไรไว้ที่ไหน ส่งข้อมูลอะไรออกไปบ้าง และรหัสล็อกอินเก็บอย่างไร' },
-		{ slug: 'license', title: 'สัญญาอนุญาตซอฟต์แวร์', summary: 'GPL-3.0 และรายชื่อโปรแกรมของคนอื่นที่แอปนำมาใช้' },
+		{ slug: 'license', title: 'สัญญาอนุญาตซอฟต์แวร์', summary: 'MIT และรายชื่อโปรแกรมของคนอื่นที่แอปนำมาใช้' },
 		{ slug: 'security', title: 'ความปลอดภัย', summary: 'ถ้าพบช่องโหว่ แจ้งเราแบบส่วนตัวได้อย่างไร' },
 		{ slug: 'cookies', title: 'คุกกี้ของเว็บไซต์', summary: 'เว็บไซต์นี้จำอะไรไว้ในเบราว์เซอร์ของคุณบ้าง' },
 	],
 	en: [
 		{ slug: 'disclaimer', title: 'Disclaimer and terms of use', summary: 'This app is not connected to Google, YouTube or Spotify. Also covers trademarks and liability.' },
 		{ slug: 'privacy', title: 'Privacy', summary: 'What the app stores and where, what it sends out, and how login details are kept.' },
-		{ slug: 'license', title: 'Software license', summary: 'GPL-3.0, and the third-party software the app uses.' },
+		{ slug: 'license', title: 'Software license', summary: 'MIT, and the third-party software the app uses.' },
 		{ slug: 'security', title: 'Security', summary: 'How to report a security problem privately.' },
 		{ slug: 'cookies', title: 'Website cookies', summary: 'What this website remembers in your browser.' },
 	],
