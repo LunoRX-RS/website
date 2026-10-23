@@ -1,0 +1,12 @@
+---
+import type { Lang } from '../../i18n';
+import { content } from './content';
+import BigMarquee from './BigMarquee';
+
+const { lang } = Astro.props as { lang: Lang };
+const t = content[lang];
+---
+
+<section class="overflow-hidden border-y border-line py-8 sm:py-12" aria-label={t.label}>
+	<BigMarquee client:visible row1={t.row1} row2={t.row2} />
+</section>

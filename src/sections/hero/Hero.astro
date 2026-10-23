@@ -1,0 +1,44 @@
+---
+import type { Lang } from '../../i18n';
+import { site } from '../site';
+import { content } from './content';
+import HeroActions from './HeroActions';
+import HeroMoon from './HeroMoon.astro';
+import HeroWindow from './HeroWindow';
+
+const { lang } = Astro.props as { lang: Lang };
+const t = content[lang];
+---
+
+<section class="relative overflow-hidden" data-hero>
+	<div class="relative mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-end px-4 pb-12 pt-[24rem] sm:px-6 sm:pb-16 sm:pt-36">
+		<div class="pointer-events-none absolute -right-[10%] top-24 -z-10 aspect-square w-[78vw] sm:-right-[18%] sm:top-[7%] sm:w-[min(100vw,80svh,820px)] lg:-right-[6%]" data-moon>
+			<HeroMoon label={t.moonLabel} />
+		</div>
+
+		<h1 class="relative text-foreground font-display text-[clamp(2.7rem,8.2vw,6rem)] font-extrabold leading-[1.12] tracking-[-0.035em] text-balance" data-hero-title>
+			<span class="block overflow-hidden py-[0.1em] -my-[0.1em]"><span class="hero-line block">{t.line1}</span></span>
+			<span class="block overflow-hidden py-[0.1em] -my-[0.1em]"><span class="hero-line block text-muted-foreground">{t.line2}</span></span>
+		</h1>
+
+		<div class="mt-10 grid grid-cols-1 items-end gap-8 lg:grid-cols-[minmax(0,34rem)_auto] lg:justify-between">
+			<p class="hero-in text-lg leading-8 text-muted-foreground">{t.body}</p>
+			<div class="hero-in"><HeroActions client:idle repo={site.repo} downloadLabel={t.download} sourceLabel={t.source} /></div>
+		</div>
+
+		<div class="hero-in mt-12 flex flex-wrap items-center justify-between gap-x-8 gap-y-3 border-t border-line pt-5 text-sm text-muted-foreground">
+			<ul class="flex flex-wrap items-center gap-x-6 gap-y-2">
+				{t.meta.map((m) => <li>{m}</li>)}
+			</ul>
+			<p class="flex items-center gap-3">
+				<span>{t.note}</span>
+			</p>
+		</div>
+	</div>
+
+	<div class="px-4 pb-24 sm:px-6 sm:pb-32">
+		<div class="mx-auto max-w-6xl" data-hero-window>
+			<HeroWindow client:idle alt={t.shotAlt} />
+		</div>
+	</div>
+</section>

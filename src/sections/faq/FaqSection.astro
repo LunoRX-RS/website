@@ -1,0 +1,19 @@
+---
+import type { Lang } from '../../i18n';
+import { site } from '../site';
+import { content } from './content';
+import Faq from './Faq';
+
+const { lang } = Astro.props as { lang: Lang };
+const t = content[lang];
+---
+
+<section id="faq" class="px-4 py-20 sm:px-6 sm:py-32" aria-labelledby="faq-title">
+	<div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+		<div data-reveal>
+			<h2 id="faq-title" class="font-display text-[clamp(2.2rem,5vw,3.75rem)] font-extrabold leading-[1.15] tracking-[-0.03em] text-balance">{t.title}</h2>
+			<p class="mt-4 max-w-sm text-base leading-8 text-muted-foreground">{t.ask} <a class="text-foreground underline underline-offset-4" href={site.issues} target="_blank" rel="noreferrer">{t.issues}</a> {t.askAfter}</p>
+		</div>
+		<div data-reveal-group><Faq client:visible items={t.items} /></div>
+	</div>
+</section>

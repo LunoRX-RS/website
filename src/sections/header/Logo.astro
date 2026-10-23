@@ -1,0 +1,13 @@
+---
+// LunoRX mark: a crescent with one small star. Uses currentColor so it follows the theme.
+const { class: cls = 'size-7', uid = 'logo' } = Astro.props;
+---
+
+<svg viewBox="0 0 40 40" class={cls} fill="none" aria-hidden="true">
+	<mask id={`${uid}-cut`} maskUnits="userSpaceOnUse" x="0" y="0" width="40" height="40">
+		<rect width="40" height="40" fill="#fff" />
+		<circle cx="26" cy="14.5" r="13" fill="#000" />
+	</mask>
+	<circle cx="19" cy="21" r="15.5" fill="currentColor" mask={`url(#${uid}-cut)`} />
+	<circle cx="31.5" cy="8.5" r="2.4" fill="currentColor" />
+</svg>

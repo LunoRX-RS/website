@@ -1,0 +1,31 @@
+---
+import type { Lang } from '../../i18n';
+import { content } from './content';
+import { art } from './art';
+
+const { lang } = Astro.props as { lang: Lang };
+const t = content[lang];
+
+---
+
+<section id="features" class="px-4 py-20 sm:px-6 sm:py-32" aria-labelledby="features-title">
+	<div class="mx-auto grid max-w-6xl grid-cols-1 gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-20">
+		<div class="lg:sticky lg:top-32 lg:self-start" data-reveal>
+			<h2 id="features-title" class="font-display text-[clamp(2.2rem,5vw,3.75rem)] font-extrabold leading-[1.15] tracking-[-0.03em] text-balance">{t.title}</h2>
+		</div>
+
+		<ul class="min-w-0 border-b border-line" data-reveal-group>
+			{t.items.map((it, i) => (
+				<li data-reveal-item style={`--i:${i}`} class="group grid grid-cols-[4.5rem_minmax(0,1fr)] gap-5 border-t border-line py-8 sm:grid-cols-[6rem_minmax(0,1fr)] sm:gap-8 sm:py-10" data-feature>
+					<svg viewBox="0 0 96 96" class="size-[4.5rem] text-foreground transition-transform duration-500 group-hover:-rotate-6 sm:size-24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						{art[i].map((p) => <path data-draw d={p.d} stroke-width={p.w ?? 1.6} class={p.soft ? 'text-muted-foreground' : ''} />)}
+					</svg>
+					<div class="min-w-0">
+						<h3 class="font-display text-xl font-bold leading-snug sm:text-2xl">{it.title}</h3>
+						<p class="mt-2 max-w-[60ch] text-base leading-8 text-muted-foreground">{it.body}</p>
+					</div>
+				</li>
+			))}
+		</ul>
+	</div>
+</section>

@@ -1,0 +1,42 @@
+---
+import type { Lang } from '../../i18n';
+import { site } from '../site';
+import { content } from './content';
+import InstallTabs from './InstallTabs';
+import { buttonVariants } from '@/components/ui/button';
+
+const { lang } = Astro.props as { lang: Lang };
+const t = content[lang];
+
+const commands = {
+	install: site.installScript,
+	deb: site.installScriptDeb,
+	remove: site.installScriptRemove,
+	xattr: 'xattr -dr com.apple.quarantine /Applications/LunoRX.app',
+};
+const os = t.os.map((o) => ({
+	...o,
+	steps: o.steps.map(({ code, ...s }) => ({ ...s, command: code ? commands[code] : undefined })),
+}));
+---
+
+<section id="download" class="px-4 py-20 sm:px-6 sm:py-32" aria-labelledby="download-title">
+	<div class="mx-auto max-w-6xl">
+		<div class="mb-10 max-w-2xl" data-reveal>
+			<h2 id="download-title" class="font-display text-[clamp(2.2rem,5vw,3.75rem)] font-extrabold leading-[1.15] tracking-[-0.03em] text-balance">{t.title}</h2>
+			<p class="mt-4 text-base leading-8 text-muted-foreground">{t.intro}</p>
+		</div>
+
+		<div data-reveal>
+			<InstallTabs client:visible os={os} releasesUrl={site.releases} releasesLabel={t.releases} copyLabel={t.copy} copiedLabel={t.copied} label={t.tabsLabel} />
+		</div>
+
+		<div class="mt-4 flex flex-col gap-5 squircle-panel border border-line bg-surface-2 p-7 sm:flex-row sm:items-center sm:justify-between sm:p-8" data-reveal>
+			<div class="min-w-0">
+				<h3 class="font-display text-lg font-bold">{t.checkTitle}</h3>
+				<p class="text-sm leading-7 text-muted-foreground">{t.checkBody}</p>
+			</div>
+			<a href={site.installGuide} target="_blank" rel="noreferrer" class={buttonVariants({ variant: 'outline', className: 'h-12 shrink-0 squircle-2xl! bg-surface px-6 text-sm' })}>{t.guide}</a>
+		</div>
+	</div>
+</section>
