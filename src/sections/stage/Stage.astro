@@ -1,0 +1,81 @@
+---
+// Desktop-only pinned scene. One viewport stays fixed while a single scrubbed GSAP timeline
+// (see motion/landing-motion.ts) plays hero -> app window -> six features -> four screenshots.
+import type { Lang } from '../../i18n';
+import { site } from '../site';
+import { content as hero } from '../hero/content';
+import { content as features } from '../features/content';
+import { content as showcase } from '../showcase/content';
+import { art } from '../features/art';
+import HeroActions from '../hero/HeroActions';
+import HeroMoon from '../hero/HeroMoon.astro';
+import Beam from './Beam';
+
+const { lang } = Astro.props as { lang: Lang };
+const h = hero[lang];
+const f = features[lang];
+const s = showcase[lang];
+---
+
+<section data-stage class="relative h-[100svh] overflow-hidden" aria-label={h.line1 + ' ' + h.line2}>
+	<div class="pointer-events-none absolute right-[-6%] top-[7%] z-0 aspect-square w-[min(100vw,80svh,820px)] will-change-transform" data-moon>
+		<HeroMoon uid="s" label={h.moonLabel} />
+	</div>
+
+	<div data-stage-box class="relative mx-auto h-full max-w-6xl px-6">
+		<!-- Act 1: title -->
+		<div class="absolute inset-x-6 bottom-12 z-10 flex flex-col">
+			<h1 data-stage-title class="relative font-display text-[clamp(2.7rem,8.2vw,6rem)] font-extrabold leading-[1.12] tracking-[-0.035em] text-foreground text-balance">
+				<span class="block overflow-hidden py-[0.1em] -my-[0.1em]"><span class="hero-line block" data-line-a>{h.line1}</span></span>
+				<span class="block overflow-hidden py-[0.1em] -my-[0.1em]"><span class="hero-line block text-muted-foreground" data-line-b>{h.line2}</span></span>
+			</h1>
+			<div data-hero-fade>
+				<div class="mt-10 grid grid-cols-[minmax(0,34rem)_auto] items-end justify-between gap-8">
+					<p class="hero-in text-lg leading-8 text-muted-foreground">{h.body}</p>
+					<div class="hero-in"><HeroActions client:idle repo={site.repo} downloadLabel={h.download} sourceLabel={h.source} /></div>
+				</div>
+				<div class="hero-in mt-10 flex items-center justify-between gap-8 border-t border-line pt-5 text-sm text-muted-foreground">
+					<ul class="flex items-center gap-x-6">{h.meta.map((m) => <li>{m}</li>)}</ul>
+					<p>{h.note}</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- Act 2: app window -->
+		<div class="pointer-events-none absolute inset-0 z-10 grid place-items-center">
+			<div data-tilt class="will-change-transform">
+			<div data-stage-frame class="relative w-[min(1040px,72vw)] squircle-3xl border border-line bg-surface p-3 opacity-0 shadow-2xl will-change-transform">
+				<div class="relative aspect-[1648/1028] w-full">
+					{s.steps.map((st, i) => (
+						<img data-shot decoding="async" src={`/images/app/${st.img}.webp`} alt={st.alt} width="1648" height="1028" fetchpriority={i === 0 ? 'high' : 'auto'} class="absolute inset-0 size-full squircle-2xl object-cover" style={`opacity:${i === 0 ? 1 : 0}`} />
+					))}
+				</div>
+				<div class="pointer-events-none absolute inset-0 squircle-3xl"><Beam client:idle /></div>
+			</div>
+			</div>
+		</div>
+
+		<!-- Acts 3 and 4: one panel per feature, then one per screenshot -->
+		<div class="pointer-events-none absolute inset-y-0 left-6 z-20 flex w-[38%] items-center">
+			<div class="relative h-[24rem] w-full">
+				{f.items.map((it, i) => (
+					<div data-panel data-kind="feature" class="absolute inset-x-0 top-1/2 -translate-y-1/2 opacity-0 will-change-transform">
+						<svg viewBox="0 0 96 96" class="size-24 text-foreground" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							{art[i].map((p) => <path data-draw d={p.d} stroke-width={p.w ?? 1.6} class={p.soft ? 'text-muted-foreground' : ''} />)}
+						</svg>
+						<h2 class="mt-6 font-display text-[clamp(1.75rem,3vw,2.5rem)] font-extrabold leading-[1.2] tracking-[-0.025em] text-balance">{it.title}</h2>
+						<p class="mt-4 max-w-md text-base leading-8 text-muted-foreground">{it.body}</p>
+					</div>
+				))}
+				{s.steps.map((st) => (
+					<div data-panel data-kind="shot" class="absolute inset-x-0 top-1/2 -translate-y-1/2 opacity-0 will-change-transform">
+						<h2 class="font-display text-[clamp(1.75rem,3vw,2.5rem)] font-extrabold leading-[1.2] tracking-[-0.025em] text-balance">{st.title}</h2>
+						<p class="mt-4 max-w-md text-base leading-8 text-muted-foreground">{st.body}</p>
+					</div>
+				))}
+			</div>
+		</div>
+	</div>
+
+	<div class="absolute inset-x-0 bottom-0 z-30 h-0.5 bg-line"><div data-stage-progress class="h-full origin-left scale-x-0 bg-emphasis"></div></div>
+</section>

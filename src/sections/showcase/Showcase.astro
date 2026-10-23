@@ -1,0 +1,43 @@
+---
+import type { Lang } from '../../i18n';
+import { content } from './content';
+
+const { lang } = Astro.props as { lang: Lang };
+const t = content[lang];
+const steps = t.steps;
+---
+
+<section id="showcase" class="relative px-4 sm:px-6" aria-labelledby="showcase-title" data-story>
+	<div class="mx-auto max-w-6xl">
+		<div class="py-16 sm:py-24" data-reveal>
+			<h2 id="showcase-title" class="max-w-2xl font-display text-[clamp(2.2rem,5vw,3.75rem)] font-extrabold leading-[1.15] tracking-[-0.03em] text-balance">{t.title}</h2>
+			<p class="mt-3 text-sm text-muted-foreground">{t.note}</p>
+		</div>
+
+		<div class="grid grid-cols-1 gap-10 lg:grid-cols-[0.75fr_1.25fr]" data-story-stage>
+			<ol class="order-2 min-w-0 lg:order-1">
+				{steps.map((s, i) => (
+					<li class="flex min-h-[45vh] items-center lg:min-h-[75vh]" data-story-step>
+						<div class="squircle-panel border border-line bg-surface p-7 sm:p-8">
+							<span class="font-mono text-sm text-muted-foreground">0{i + 1}</span>
+							<h3 class="mt-3 font-display text-xl font-bold leading-snug sm:text-2xl">{s.title}</h3>
+							<p class="mt-3 text-base leading-8 text-muted-foreground">{s.body}</p>
+						</div>
+					</li>
+				))}
+			</ol>
+
+			<div class="order-1 lg:order-2">
+				<div class="sticky top-24 flex items-center lg:h-[calc(100vh-8rem)]" data-story-pin>
+					<div class="relative w-full squircle-3xl border border-line bg-surface p-2 shadow-2xl sm:p-3">
+						<div class="relative aspect-[1648/1028] w-full">
+							{steps.map((s, i) => (
+								<img src={`/images/app/${s.img}.webp`} alt={s.alt} width="1648" height="1028" loading={i === 0 ? 'eager' : 'lazy'} class="absolute inset-0 size-full squircle-2xl object-cover" data-story-screen style={`opacity:${i === 0 ? 1 : 0}`} />
+							))}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

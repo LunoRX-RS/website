@@ -1,0 +1,43 @@
+---
+import { localePath, type Lang } from '../../i18n';
+import { legalPages, nav, site } from '../site';
+import { content } from './content';
+import Logo from '../header/Logo.astro';
+
+const { lang } = Astro.props as { lang: Lang };
+const t = content[lang];
+---
+
+<footer class="border-t border-line px-4 pb-0 pt-12 sm:px-6">
+	<div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
+		<div>
+			<a href={localePath(lang, '/')} class="inline-flex items-center gap-2.5" aria-label={t.home}>
+				<Logo class="size-7 text-foreground" uid="ftr" />
+				<span class="font-display text-base font-bold">{site.name}</span>
+			</a>
+			<p class="mt-4 max-w-sm text-sm leading-7 text-muted-foreground">{t.tagline}</p>
+		</div>
+		<nav aria-label={t.links}>
+			<p class="text-sm font-semibold">{t.project}</p>
+			<ul class="mt-4 space-y-2 text-sm text-muted-foreground">
+				{nav[lang].slice(0, 4).map((n) => <li><a class="hover:text-foreground" href={localePath(lang, `/#${n.id}`)}>{n.label}</a></li>)}
+				<li><a class="hover:text-foreground" href={site.repo} target="_blank" rel="noreferrer">GitHub</a></li>
+			</ul>
+		</nav>
+		<nav aria-label={t.legalLabel}>
+			<p class="text-sm font-semibold">{t.legal}</p>
+			<ul class="mt-4 space-y-2 text-sm text-muted-foreground">
+				{legalPages[lang].map((p) => <li><a class="hover:text-foreground" href={localePath(lang, `/legal/${p.slug}/`)}>{p.title}</a></li>)}
+			</ul>
+		</nav>
+	</div>
+	<div class="mx-auto mt-10 max-w-6xl space-y-2 border-t border-line pt-6 text-xs leading-6 text-muted-foreground">
+		<p>{t.disclaimer}</p>
+		<p>{t.copyright}</p>
+	</div>
+	<div class="mx-auto mt-14 max-w-6xl overflow-hidden [container-type:inline-size]" aria-hidden="true">
+		<div class="h-[16.6cqw] overflow-hidden">
+			<p class="-mt-[4.4cqw] select-none whitespace-nowrap  font-display text-[28.8cqw] font-extrabold leading-none tracking-[-0.05em] text-surface-2" data-wordmark>LunoRX</p>
+		</div>
+	</div>
+</footer>

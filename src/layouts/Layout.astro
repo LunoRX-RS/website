@@ -1,12 +1,105 @@
+---
+import '@fontsource-variable/manrope';
+import '@fontsource-variable/geist';
+import '@fontsource-variable/noto-sans-thai';
+import manropeLatin from '@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2?url';
+import thaiFont from '@fontsource-variable/noto-sans-thai/files/noto-sans-thai-thai-wght-normal.woff2?url';
+import '../styles/global.css';
+import { switchPath, type Lang } from '../i18n';
+
+interface Props {
+	lang?: Lang;
+	title?: string;
+	description?: string;
+	/** Keep the page out of search results and the sitemap. */
+	noindex?: boolean;
+	/** Whether the page has a translated twin (adds hreflang links). */
+	alternates?: boolean;
+	jsonLd?: Record<string, unknown>[];
+}
+
+const {
+	lang = 'th',
+	title = 'LunoRX | YouTube Music player for desktop',
+	description = 'LunoRX is an open source YouTube Music player for Mac, Windows and Linux.',
+	noindex = false,
+	alternates = true,
+	jsonLd = [],
+} = Astro.props;
+
+const pathname = Astro.url.pathname;
+const origin = Astro.site; // undefined when SITE_URL is not configured
+const canonical = origin ? new URL(pathname, origin).toString() : undefined;
+const otherLang: Lang = lang === 'th' ? 'en' : 'th';
+const otherUrl = origin ? new URL(switchPath(pathname), origin).toString() : undefined;
+const thUrl = lang === 'th' ? canonical : otherUrl;
+const enUrl = lang === 'en' ? canonical : otherUrl;
+const ogImage = origin ? new URL(`/og-${lang}.png`, origin).toString() : undefined;
+const locale = (l: Lang) => (l === 'th' ? 'th_TH' : 'en_US');
+---
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1'} />
+		{canonical && <link rel="canonical" href={canonical} />}
+		{origin && alternates && !noindex && (
+			<>
+				<link rel="alternate" hreflang="th-TH" href={thUrl} />
+				<link rel="alternate" hreflang="en-US" href={enUrl} />
+				<link rel="alternate" hreflang="x-default" href={thUrl} />
+			</>
+		)}
+
+		<meta name="color-scheme" content="light dark" />
+		<meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="#27272a" media="(prefers-color-scheme: dark)" />
+		<meta name="application-name" content="LunoRX" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" sizes="48x48" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="LunoRX" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		{canonical && <meta property="og:url" content={canonical} />}
+		<meta property="og:locale" content={locale(lang)} />
+		{alternates && !noindex && <meta property="og:locale:alternate" content={locale(otherLang)} />}
+		{ogImage && (
+			<>
+				<meta property="og:image" content={ogImage} />
+				<meta property="og:image:width" content="1200" />
+				<meta property="og:image:height" content="630" />
+				<meta property="og:image:alt" content={title} />
+				<meta name="twitter:image" content={ogImage} />
+			</>
+		)}
+		<meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+
+		<link rel="preload" as="font" type="font/woff2" href={manropeLatin} crossorigin />
+		{lang === 'th' && <link rel="preload" as="font" type="font/woff2" href={thaiFont} crossorigin />}
+
+		{jsonLd.map((data) => <script type="application/ld+json" set:html={JSON.stringify(data)} />)}
+
+		<script is:inline>
+			(function () {
+				try {
+					var t = localStorage.getItem('theme');
+					var dark = t ? t === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+					document.documentElement.classList.toggle('dark', dark);
+					document.documentElement.classList.add('js');
+					if (matchMedia('(min-width: 1024px) and (prefers-reduced-motion: no-preference)').matches) document.documentElement.classList.add('stage-on');
+				} catch (e) {}
+			})();
+		</script>
 	</head>
 	<body>
 		<slot />
@@ -18,6 +111,7 @@
 	body {
 		margin: 0;
 		width: 100%;
-		height: 100%;
+		min-height: 100%;
 	}
+	body { min-height: 100vh; }
 </style>

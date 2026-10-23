@@ -1,0 +1,10 @@
+---
+import LegalPage from '../../../sections/legal/LegalPage.astro';
+import { legalDocs } from '../../../sections/legal/documents';
+
+export function getStaticPaths() {
+	return Object.keys(legalDocs.en).map((slug) => ({ params: { slug } }));
+}
+---
+
+<LegalPage lang="en" slug={Astro.params.slug as string} />

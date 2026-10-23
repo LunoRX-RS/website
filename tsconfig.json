@@ -9,6 +9,12 @@
     "dist"
 ],
 "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "baseUrl": ".",
+    "paths": {
+        "@/*": ["./src/*"]
+    },
     "types": [
         "./worker-configuration.d.ts",
         "node"

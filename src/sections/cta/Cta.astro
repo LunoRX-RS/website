@@ -1,0 +1,24 @@
+---
+import type { Lang } from '../../i18n';
+import { site } from '../site';
+import { content } from './content';
+import CtaButtons from './CtaButtons';
+
+const { lang } = Astro.props as { lang: Lang };
+const t = content[lang];
+---
+
+<section class="px-4 py-16 sm:px-6 sm:py-24" aria-labelledby="cta-title">
+	<div class="relative mx-auto max-w-6xl overflow-hidden squircle-panel border border-line bg-emphasis p-8 text-emphasis-foreground sm:p-14" data-reveal>
+		<svg viewBox="0 0 400 400" class="pointer-events-none absolute -right-24 -top-24 size-[26rem] opacity-20 sm:-right-10 sm:-top-16 sm:size-[34rem]" aria-hidden="true" data-parallax="-0.15" fill="none">
+			<mask id="cta-cut"><rect width="400" height="400" fill="#fff" /><circle cx="250" cy="170" r="130" fill="#000" /></mask>
+			<circle cx="200" cy="200" r="150" class="fill-emphasis-foreground" mask="url(#cta-cut)" />
+			<circle cx="200" cy="200" r="190" class="stroke-emphasis-foreground" stroke-width="1.5" stroke-dasharray="2 10" stroke-linecap="round" />
+		</svg>
+		<div class="relative max-w-2xl">
+			<h2 id="cta-title" class="font-display text-[clamp(2.2rem,5.5vw,4.25rem)] font-extrabold leading-[1.15] tracking-[-0.03em] text-balance">{t.title}</h2>
+			<p class="mt-4 max-w-lg text-base leading-8 opacity-80">{t.body}</p>
+			<CtaButtons client:visible releases={site.releases} repo={site.repo} downloadLabel={t.download} sourceLabel={t.source} />
+		</div>
+	</div>
+</section>

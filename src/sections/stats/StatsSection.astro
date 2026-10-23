@@ -1,0 +1,14 @@
+---
+import type { Lang } from '../../i18n';
+import { content } from './content';
+import Stats from './Stats';
+
+const { lang } = Astro.props as { lang: Lang };
+const t = content[lang];
+---
+
+<section class="px-4 py-12 sm:px-6 sm:py-20" aria-label={t.label}>
+	<div class="mx-auto max-w-6xl">
+		<div data-reveal-group><Stats client:visible stats={t.stats} /></div>
+	</div>
+</section>

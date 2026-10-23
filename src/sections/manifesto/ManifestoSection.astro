@@ -1,0 +1,12 @@
+---
+import type { Lang } from '../../i18n';
+import { content } from './content';
+import Manifesto from './Manifesto';
+
+const { lang } = Astro.props as { lang: Lang };
+const t = content[lang];
+---
+
+<section aria-label={t.label}>
+	<Manifesto client:visible text={t.text} />
+</section>

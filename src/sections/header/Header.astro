@@ -1,0 +1,27 @@
+---
+import { localePath, switchPath, type Lang } from '../../i18n';
+import { nav, site } from '../site';
+import { content } from './content';
+import HeaderTools from './HeaderTools';
+import Logo from './Logo.astro';
+
+const { lang } = Astro.props as { lang: Lang };
+const t = content[lang];
+const links = nav[lang].map((n) => ({ href: localePath(lang, `/#${n.id}`), label: n.label }));
+const switchHref = switchPath(Astro.url.pathname);
+---
+
+<header class="fixed inset-x-0 top-0 z-40 px-4 pt-4 sm:px-6" data-header>
+	<div class="relative mx-auto flex h-14 max-w-6xl items-center justify-between squircle-3xl border border-line bg-surface/95 pl-4 pr-2 shadow-sm">
+		<a href={localePath(lang, '/')} class="group flex items-center gap-2.5" aria-label={t.home}>
+			<Logo class="size-7 text-foreground transition-transform duration-500 group-hover:-rotate-12" uid="hdr" />
+			<span class="font-display text-[1.05rem] font-extrabold tracking-[-0.03em]">{site.name}</span>
+		</a>
+		<nav class="absolute left-1/2 hidden -translate-x-1/2 items-center gap-0.5 md:flex" aria-label={t.menuLabel}>
+			{links.map((item) => (
+				<a href={item.href} class="squircle-xl px-3.5 py-2 text-sm text-muted-foreground transition-colors duration-200 hover:bg-surface-2 hover:text-foreground">{item.label}</a>
+			))}
+		</nav>
+		<HeaderTools client:idle links={links} download={localePath(lang, '/#download')} github={site.repo} switchHref={switchHref} lang={lang} t={t} />
+	</div>
+</header>
