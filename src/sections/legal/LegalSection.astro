@@ -1,0 +1,31 @@
+---
+import { localePath, type Lang } from '../../i18n';
+import { legalPages, site } from '../site';
+import { content } from './content';
+
+const { lang } = Astro.props as { lang: Lang };
+const t = content[lang];
+---
+
+<section id="legal" class="px-4 py-20 sm:px-6 sm:py-32" aria-labelledby="legal-title">
+	<div class="mx-auto grid max-w-6xl grid-cols-1 gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-20">
+		<div class="lg:sticky lg:top-32 lg:self-start" data-reveal>
+			<h2 id="legal-title" class="font-display text-[clamp(2.2rem,5vw,3.75rem)] font-extrabold leading-[1.15] tracking-[-0.03em] text-balance">{t.title}</h2>
+			<p class="mt-5 max-w-sm text-base leading-8 text-muted-foreground">{t.body}</p>
+			<p class="mt-6 text-sm text-muted-foreground">{t.ask} <a class="text-foreground underline underline-offset-4" href={site.issues} target="_blank" rel="noreferrer">{t.issues}</a></p>
+		</div>
+		<ul class="min-w-0 border-b border-line" data-reveal-group>
+			{legalPages[lang].map((p, i) => (
+				<li data-reveal-item style={`--i:${i}`} class="border-t border-line">
+					<a href={localePath(lang, `/legal/${p.slug}/`)} class="group flex items-center justify-between gap-6 py-7 transition-colors hover:bg-surface sm:px-4 sm:py-8">
+						<div class="min-w-0">
+							<h3 class="font-display text-xl font-bold leading-snug">{p.title}</h3>
+							<p class="mt-1.5 max-w-[56ch] text-base leading-7 text-muted-foreground">{p.summary}</p>
+						</div>
+						<span aria-hidden="true" class="grid size-11 shrink-0 place-items-center squircle-xl border border-line transition-all duration-300 group-hover:translate-x-1 group-hover:bg-emphasis group-hover:text-emphasis-foreground">→</span>
+					</a>
+				</li>
+			))}
+		</ul>
+	</div>
+</section>

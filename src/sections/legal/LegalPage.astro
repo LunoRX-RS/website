@@ -1,0 +1,43 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../header/Header.astro';
+import Footer from '../footer/Footer.astro';
+import { localePath, type Lang } from '../../i18n';
+import { site } from '../site';
+import { content } from './content';
+import { legalDocs } from './documents';
+import { breadcrumbs, webPage } from '../../lib/seo';
+
+const { lang, slug } = Astro.props as { lang: Lang; slug: string };
+const doc = legalDocs[lang][slug];
+const t = content[lang];
+const path = localePath(lang, `/legal/${slug}/`);
+const jsonLd = [
+	webPage(Astro.site, lang, doc.title, doc.intro, path),
+	breadcrumbs(Astro.site, [
+		{ name: 'LunoRX', path: localePath(lang, '/') },
+		{ name: doc.title, path },
+	]),
+];
+---
+
+<Layout lang={lang} title={`${doc.title} | LunoRX`} description={doc.intro} jsonLd={jsonLd}>
+	<Header lang={lang} />
+	<main class="px-4 pb-20 pt-32 sm:px-6 sm:pt-40">
+		<article class="mx-auto max-w-3xl">
+			<a href={localePath(lang, '/#legal')} class="text-sm text-muted-foreground hover:text-foreground">{t.back}</a>
+			<h1 class="mt-6 font-display text-4xl font-extrabold leading-snug tracking-tight text-balance sm:text-5xl">{doc.title}</h1>
+			<p class="mt-3 text-sm text-muted-foreground">{t.updated}: {site.updated[lang]}</p>
+			<p class="mt-8 text-lg leading-9">{doc.intro}</p>
+			{doc.sections.map((s) => (
+				<section class="mt-12">
+					<h2 class="font-display text-xl font-bold">{s.heading}</h2>
+					<ul class="mt-4 space-y-3 text-base leading-8 text-muted-foreground">
+						{s.body.map((b) => <li>{b}</li>)}
+					</ul>
+				</section>
+			))}
+		</article>
+	</main>
+	<Footer lang={lang} />
+</Layout>
