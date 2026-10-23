@@ -1,46 +1,43 @@
-# Astro Starter Kit: Basics
+# LunoRX Website
+
+Astro 7 starter for the LunoRX website, deployed through the Cloudflare adapter.
+
+## Stack
+
+- Astro 7 and Cloudflare
+- Tailwind CSS 4 via the Vite plugin
+- React 19 islands for interactive components
+- shadcn/ui CLI with the Base UI primitive library and zinc semantic tokens
+- All currently served shadcn/Base UI and Magic UI registry components, installed as editable source
+- Motion, Lucide, `cn()` utility, and squircle radius utilities
+
+## Getting started
+
+Requires Node.js `>=22.23.4` and Bun.
 
 ```sh
-npm create astro@latest -- --template basics
+bun install
+bun run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Astro's dev server runs in background mode. Manage it with `bunx astro dev status`, `bunx astro dev logs`, and `bunx astro dev stop`.
 
-## 🚀 Project Structure
+## Checks and deployment
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```sh
+bun run typecheck
+bun run build
+bun run preview
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+GitHub Actions runs typecheck and a production build for pushes to `main`, pull requests targeting `main`, and manual dispatches.
 
-## 🧞 Commands
+## Component gallery
 
-All commands are run from the root of the project, from a terminal:
+Open `/components/` for a searchable catalog and interactive examples. Component source lives in `src/components/ui/` (with `striped-pattern` in `src/components/magicui/`). Copy an import path from any catalog row to use the component in another page or React island.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## UI foundation
 
-## 👀 Want to learn more?
+Global design tokens and `squircle-*` utilities live in `src/styles/global.css`. Prefer semantic classes such as `bg-canvas`, `bg-surface`, `border-line`, `text-foreground`, and `text-muted-foreground`; use `bg-emphasis` sparingly for primary actions. Use the `squircle-*` utilities instead of Tailwind's `rounded-*` utilities.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Add shadcn components with `bun run shadcn add button`. Add Magic UI registry components with `bun run shadcn add @magicui/marquee`. Components are copied into `src/components/ui` and can be composed in Astro pages or hydrated React islands.
