@@ -355,3 +355,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
     animation: none;
     mix-blend-mode: normal;
 }
+
+/* SmoothCursor sets body cursor to none; make links and buttons follow so only the component is visible. */
+body[style*="cursor: none"] * { cursor: none !important; }

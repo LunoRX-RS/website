@@ -1,21 +1,22 @@
-import { MenuIcon } from "lucide-react"
+import { MenuIcon, XIcon } from "lucide-react"
 
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
 import { Button } from "@/components/ui/button"
 import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet"
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
 
 type Link = { href: string; label: string }
 type Labels = {
   download: string
   theme: string
   openMenu: string
+  closeMenu: string
   menu: string
   mobileMenu: string
   downloadApp: string
@@ -88,8 +89,8 @@ export default function HeaderTools({
       >
         {t.download}
       </Button>
-      <Sheet>
-        <SheetTrigger
+      <Drawer swipeDirection="right">
+        <DrawerTrigger
           render={
             <Button
               variant="ghost"
@@ -99,14 +100,25 @@ export default function HeaderTools({
           }
         >
           <MenuIcon />
-        </SheetTrigger>
-        <SheetContent side="right" className="p-6">
-          <SheetHeader className="p-0">
-            <SheetTitle className="font-display text-lg">{t.menu}</SheetTitle>
-          </SheetHeader>
+        </DrawerTrigger>
+        <DrawerContent className="squircle-panel p-6">
+          <DrawerHeader className="flex-row items-center justify-between p-0">
+            <DrawerTitle className="font-display text-lg">{t.menu}</DrawerTitle>
+            <DrawerClose
+              render={
+                <Button
+                  variant="ghost"
+                  aria-label={t.closeMenu}
+                  className="size-10 squircle-2xl!"
+                />
+              }
+            >
+              <XIcon />
+            </DrawerClose>
+          </DrawerHeader>
           <nav className="flex flex-col gap-1" aria-label={t.mobileMenu}>
             {links.map((item) => (
-              <SheetClose
+              <DrawerClose
                 key={item.href}
                 nativeButton={false}
                 render={
@@ -117,7 +129,7 @@ export default function HeaderTools({
                 }
               >
                 {item.label}
-              </SheetClose>
+              </DrawerClose>
             ))}
           </nav>
           <Button
@@ -127,8 +139,8 @@ export default function HeaderTools({
           >
             {t.downloadApp}
           </Button>
-        </SheetContent>
-      </Sheet>
+        </DrawerContent>
+      </Drawer>
     </div>
   )
 }

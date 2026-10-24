@@ -5,6 +5,7 @@ import Footer from '../footer/Footer.astro';
 import { localePath, type Lang } from '../../i18n';
 import { site } from '../site';
 import { content } from './content';
+import SiteCursor from '../cursor/SiteCursor';
 import { legalDocs } from './documents';
 import { breadcrumbs, webPage } from '../../lib/seo';
 
@@ -40,4 +41,5 @@ const jsonLd = [
 		</article>
 	</main>
 	<Footer lang={lang} />
+	<SiteCursor client:idle />
 </Layout>
