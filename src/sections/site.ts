@@ -46,6 +46,7 @@ export const nav: Localized<{ id: string; label: string }[]> = {
 export const legalPages: Localized<{ slug: string; title: string; summary: string }[]> = {
 	th: [
 		{ slug: 'disclaimer', title: 'ข้อสงวนสิทธิ์และเงื่อนไขการใช้งาน', summary: 'แอปนี้ไม่ได้เกี่ยวข้องกับ Google, YouTube หรือ Spotify รวมถึงเรื่องเครื่องหมายการค้าและความรับผิด' },
+		{ slug: 'terms', title: 'ข้อกำหนดการใช้งาน', summary: 'เงื่อนไขการใช้แอป บัญชี LunoRX ลิงก์แชร์ และการใช้งานที่ไม่อนุญาต' },
 		{ slug: 'privacy', title: 'ความเป็นส่วนตัว', summary: 'แอปเก็บอะไรไว้ที่ไหน ส่งข้อมูลอะไรออกไปบ้าง และรหัสล็อกอินเก็บอย่างไร' },
 		{ slug: 'license', title: 'สัญญาอนุญาตซอฟต์แวร์', summary: 'MIT และรายชื่อโปรแกรมของคนอื่นที่แอปนำมาใช้' },
 		{ slug: 'security', title: 'ความปลอดภัย', summary: 'ถ้าพบช่องโหว่ แจ้งเราแบบส่วนตัวได้อย่างไร' },
@@ -53,6 +54,7 @@ export const legalPages: Localized<{ slug: string; title: string; summary: strin
 	],
 	en: [
 		{ slug: 'disclaimer', title: 'Disclaimer and terms of use', summary: 'This app is not connected to Google, YouTube or Spotify. Also covers trademarks and liability.' },
+		{ slug: 'terms', title: 'Terms of service', summary: 'The rules for using the app, a LunoRX account and share links, and what is not allowed.' },
 		{ slug: 'privacy', title: 'Privacy', summary: 'What the app stores and where, what it sends out, and how login details are kept.' },
 		{ slug: 'license', title: 'Software license', summary: 'MIT, and the third-party software the app uses.' },
 		{ slug: 'security', title: 'Security', summary: 'How to report a security problem privately.' },
