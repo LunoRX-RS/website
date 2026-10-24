@@ -19,7 +19,12 @@ function Arrow() {
 export default function SiteCursor() {
   const [on, setOn] = useState(false)
   useEffect(() => {
-    setOn(!matchMedia("(prefers-reduced-motion: reduce)").matches)
+    // Follow the preference live; turning reduced motion on unmounts the cursor and restores the native one.
+    const mq = matchMedia("(prefers-reduced-motion: reduce)")
+    const update = () => setOn(!mq.matches)
+    update()
+    mq.addEventListener("change", update)
+    return () => mq.removeEventListener("change", update)
   }, [])
   return on ? <SmoothCursor cursor={<Arrow />} /> : null
 }

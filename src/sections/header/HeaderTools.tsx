@@ -1,4 +1,4 @@
-import { MenuIcon } from "lucide-react"
+import { MenuIcon, XIcon } from "lucide-react"
 
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
 import { Button } from "@/components/ui/button"
@@ -16,6 +16,7 @@ type Labels = {
   download: string
   theme: string
   openMenu: string
+  closeMenu: string
   menu: string
   mobileMenu: string
   downloadApp: string
@@ -101,8 +102,19 @@ export default function HeaderTools({
           <MenuIcon />
         </DrawerTrigger>
         <DrawerContent className="squircle-panel p-6">
-          <DrawerHeader className="p-0">
+          <DrawerHeader className="flex-row items-center justify-between p-0">
             <DrawerTitle className="font-display text-lg">{t.menu}</DrawerTitle>
+            <DrawerClose
+              render={
+                <Button
+                  variant="ghost"
+                  aria-label={t.closeMenu}
+                  className="size-10 squircle-2xl!"
+                />
+              }
+            >
+              <XIcon />
+            </DrawerClose>
           </DrawerHeader>
           <nav className="flex flex-col gap-1" aria-label={t.mobileMenu}>
             {links.map((item) => (
